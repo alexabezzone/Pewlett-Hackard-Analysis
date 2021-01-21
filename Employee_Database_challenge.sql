@@ -27,3 +27,20 @@ INTO retiring_titles_count
 FROM unique_titles AS u
 GROUP BY u.title 
 ORDER BY COUNT(u.title) DESC;
+
+SELECT DISTINCT ON (e.emp_no) 
+e.emp_no, 
+e.first_name, 
+e.last_name, 
+e.birth_date, 
+de.from_date,
+de.to_date,
+t.title
+INTO mentorship_eligibility
+FROM employees AS e
+JOIN dept_emp AS de ON (de.emp_no = e.emp_no)
+JOIN title AS t ON (t.emp_no = e.emp_no)
+WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
+ORDER BY e.emp_no;
+
+
